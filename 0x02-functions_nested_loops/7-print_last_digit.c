@@ -1,15 +1,15 @@
 #include "main.h"
 /**
-* _abs - prints the absolute value of a number
-*@i: number targeted
+*print_last_digit - function that print last digit of a number
+*@n: number to be targeted
 *Return: returns 0
 */
-int _abs(int i)
+int print_last_digit(int n)
 {
-if (i > 0)
-return (i);
-else if (i < 0)
-return (-i);
-else
-return (0);
+int lastdigit = n % 10;
+if (lastdigit < 0)
+lastdigit *= -1;
+
+_putchar (lastdigit + '0');
+return (lastdigit);
 }
