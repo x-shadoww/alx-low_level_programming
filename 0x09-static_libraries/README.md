@@ -1,1 +1,1 @@
-intro to static libraries
+introduction to static libraries
