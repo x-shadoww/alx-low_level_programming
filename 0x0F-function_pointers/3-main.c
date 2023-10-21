@@ -1,31 +1,49 @@
-#include "3-calc.h"
-#include <stdio.h>
-#include <string.h>
+#include "function_pointers.h"
+	#include <stdlib.h>
+	#include <stdio.h>
+	#include "3-calc.h"
+	/**
+	 * main - Prints the result of simple operations.
+	 * @argc: The number of arguments supplied to the program.
+	 * @argv: An array of pointers to the arguments.
+	 *
+	 * Return: Always 0.
+	 */
+	int main(int __attribute__((__unused__)) argc, char *argv[])
+	{
+		int num1, num2;
+		char *op;
 
-/**
- * get_op_func - Compares function with pointer and returns the equal.
- * @s: points a char
- * Return: Returns the function and the operator when equal
-**/
 
-int (*get_op_func(char *s))(int, int)
-{
-op_t ops[] = {
-{"+", op_add},
-{"-", op_sub},
-{"*", op_mul},
-{"/", op_div},
-{"%", op_mod},
-{NULL, NULL}
-};
+		if (argc != 4)
+		{
+			printf("Error\n");
+			exit(98);
+		}
 
-int i = 0;
 
-while (ops[i].op != NULL)
-{
-if (!strcmp(ops[i].op, s))
-return (ops[i].f);
-i++;
-}
-return (NULL);
-}
+		num1 = atoi(argv[1]);
+		op = argv[2];
+		num2 = atoi(argv[3]);
+
+
+		if (get_op_func(op) == NULL || op[1] != '\0')
+		{
+			printf("Error\n");
+			exit(99);
+		}
+
+
+		if ((*op == '/' && num2 == 0) ||
+		    (*op == '%' && num2 == 0))
+		{
+			printf("Error\n");
+			exit(100);
+		}
+
+
+		printf("%d\n", get_op_func(op)(num1, num2));
+
+
+		return (0);
+	}
